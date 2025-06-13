@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Launch Roots | Internships</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-dark: #174ea6;
+      --bg: #f5f7fa;
+      --text: #202124;
+      --text-light: #5f6368;
+      --card-bg: #ffffff;
+      --accent: #e8f0fe;
+      --success: #28a745;
+      --error: #e74c3c;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    header {
+      background: var(--accent);
+      text-align: center;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      animation: fadeInDown 1s ease;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header img {
+      height: 60px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+    @media (min-width: 768px) {
+      header img {
+        height: 80px;
+      }
+    }
+    header img:hover {
+      transform: scale(1.05);
+    }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 768px) {
+      .nav-links {
+        gap: 1rem;
+      }
+    }
+    .nav-links a {
+      margin: 0 0.25rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--primary-dark);
+      transition: all 0.3s;
+      padding: 0.5rem 0.8rem;
+      border-radius: 30px;
+      position: relative;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    @media (min-width: 768px) {
+      .nav-links a {
+        margin: 0 0.5rem;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+      }
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+      background: rgba(26, 115, 232, 0.1);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    .hero, section {
+      padding: 2rem 1rem;
+      text-align: center;
+      animation: fadeInUp 1s ease;
+    }
+    @media (min-width: 768px) {
+      .hero, section {
+        padding: 3rem 2rem;
+      }
+    }
+    h1, h2, h3 {
+      transition: transform 0.3s ease;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 1.8rem;
+    }
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      h2 {
+        font-size: 2rem;
+      }
+    }
+    h1:hover, h2:hover, h3:hover {
+      transform: scale(1.02);
+    }
+    .cta-button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 1rem 0.5rem 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(26, 115, 232, 0.2);
+      display: inline-block;
+      text-decoration: none;
+    }
+    .cta-button:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 12px rgba(26, 115, 232, 0.3);
+    }
+    .cta-button:active {
+      transform: translateY(1px);
+    }
+    .cta-button::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
+    }
+    .cta-button:focus:not(:active)::after {
+      animation: ripple 1s ease-out;
+    }
+    .trust-section, .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      animation: fadeIn 2s ease-in-out;
+    }
+    @media (min-width: 768px) {
+      .trust-section, .card-grid {
+        gap: 1.5rem;
+        padding: 2rem;
+      }
+    }
+    .trust-item, .card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      flex: 1 1 calc(50% - 2rem);
+      max-width: 300px;
+      margin: 0.5rem;
+    }
+    @media (min-width: 768px) {
+      .trust-item, .card {
+        flex: 1 1 calc(33.333% - 2rem);
+      }
+    }
+    @media (min-width: 1024px) {
+      .trust-item, .card {
+        flex: 1 1 calc(25% - 2rem);
+      }
+    }
+    .card:hover, .trust-item:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .trust-item img {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.5s ease;
+    }
+    .trust-item:hover img {
+      transform: rotate(360deg);
+    }
+    .faq h3 {
+      margin-top: 1rem;
+      color: var(--primary);
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: all 0.3s;
+      text-align: left;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .faq h3:hover {
+      background: rgba(26, 115, 232, 0.1);
+    }
+    .faq p {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 1rem;
+      margin: 0 auto;
+      max-width: 800px;
+      text-align: left;
+    }
+    .faq h3.active + p {
+      max-height: 500px;
+      padding: 0 1rem 1rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--accent);
+      color: var(--text-light);
+      animation: fadeInUp 1s ease;
+    }
+    #certificate-section input {
+      padding: 0.8rem;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin: 0.5rem 0;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+    #certificate-section input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+      transform: scale(1.02);
+    }
+    #certificate-section .download-link {
+      background: var(--success);
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      margin-top: 1rem;
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      animation: fadeIn 1s ease;
+      transition: all 0.3s;
+    }
+    #certificate-section .download-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+    }
+    .contact a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+      display: inline-block;
+      margin: 0.5rem 0;
+    }
+    .contact a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+    .contact a:hover::after {
+      width: 100%;
+    }
+    .contact a:hover {
+      color: var(--primary-dark);
+    }
+    .scroll-top {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 99;
+      font-size: 1.2rem;
+      border: none;
+    }
+    @media (min-width: 768px) {
+      .scroll-top {
+        width: 50px;
+        height: 50px;
+        bottom: 2rem;
+        right: 2rem;
+      }
+    }
+    .scroll-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .scroll-top:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes ripple {
+      0% {
+        transform: scale(0, 0);
+        opacity: 1;
+      }
+      20% {
+        transform: scale(25, 25);
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(40, 40);
+      }
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.7);
+      }
+      70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(26, 115, 232, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(26, 115, 232, 0);
+      }
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    .shake {
+      animation: shake 0.5s;
+    }
+    .card, .trust-item, section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--primary-dark);
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin: 0.5rem auto;
+    }
+    @media (max-width: 767px) {
+      .menu-toggle {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .nav-links a {
+        margin: 0.25rem 0;
+        padding: 0.8rem;
+      }
+    }
+    /* Social Media Styles */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .social-links a {
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+    .social-links a:hover {
+      transform: translateY(-3px) scale(1.1);
+    }
+    .social-links img {
+      width: 32px;
+      height: 32px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Logo.png" alt="Launch Roots Logo" class="floating">
+    <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#internships">Internships</a>
+      <a href="#faq">FAQ</a>
+      <a href="#certificate">Certificate</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <h1>Launch Your Career with Roots</h1>
+    <p>Join students gaining real-world skills through certified, remote internships. Built for learners. Backed by industry.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdooM0HQWLGfNiRwhNKoPJMpi8DNR3xJP-K48Mtr_Z1ZboNCQ/viewform" class="cta-button pulse">Apply Now</a>
+    <a href="#internships" class="cta-button">Explore Internships</a>
+  </section>
+
+  <section id="about">
+    <h2>About Launch Roots</h2>
+    <p style="max-width: 800px; margin: auto; text-align: center; font-size: 1.05rem; color: var(--text-light);">
+      Launch Roots is an affordable internship platform designed to empower students with real-world skills through certified, remote learning experiences.
+      We believe in practical learning, personal growth, and community support. Every internship we offer is structured to build confidence, enhance your resume,
+      and prepare you for a successful career in tech.
+      <br><br>
+      Whether you're passionate about web development, digital marketing, data science, or cybersecurity — Launch Roots provides the guidance and platform to grow and shine.
+    </p>
+  </section>
+
+  <section class="trust-section">
+    <div class="trust-item">
+      <img src="https://img.icons8.com/color/48/verified-badge.png" alt="Certified" />
+      <p>Verified Certificates</p>
+    </div>
+    <div class="trust-item">
+      <img src="https://img.icons8.com/color/48/conference-call.png" alt="Experts" />
+      <p>Built by Industry Experts</p>
+    </div>
+    <div class="trust-item">
+      <img src="https://img.icons8.com/color/48/calendar.png" alt="Flexible" />
+      <p>Flexible Schedule</p>
+    </div>
+  </section>
+
+  <section id="internships">
+    <h2>Internship Domains</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Web Development</h3>
+        <p>HTML, CSS, JavaScript, Responsive Design</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdooM0HQWLGfNiRwhNKoPJMpi8DNR3xJP-K48Mtr_Z1ZboNCQ/viewform" class="cta-button">Apply Now</a>
+      </div>
+      <div class="card">
+        <h3>UI/UX Design</h3>
+        <p>Figma, Wireframing, User Research, Prototyping</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdooM0HQWLGfNiRwhNKoPJMpi8DNR3xJP-K48Mtr_Z1ZboNCQ/viewform" class="cta-button">Apply Now</a>
+      </div>
+      <div class="card">
+        <h3>Data Science and Analytics</h3>
+        <p>Python, SQL, Data Visualization, Machine Learning</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdooM0HQWLGfNiRwhNKoPJMpi8DNR3xJP-K48Mtr_Z1ZboNCQ/viewform" class="cta-button">Apply Now</a>
+      </div>
+      <div class="card">
+        <h3>Digital Marketing</h3>
+        <p>SEO, Social Media, Content Marketing, Analytics</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdooM0HQWLGfNiRwhNKoPJMpi8DNR3xJP-K48Mtr_Z1ZboNCQ/viewform" class="cta-button">Apply Now</a>
+      </div>
+      <div class="card">
+        <h3>Cloud Computing (AWS Basics)</h3>
+        <p>EC2, S3, Lambda, Cloud Architecture</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdooM0HQWLGfNiRwhNKoPJMpi8DNR3xJP-K48Mtr_Z1ZboNCQ/viewform" class="cta-button">Apply Now</a>
+      </div>
+      <div class="card">
+        <h3>Mobile App Development</h3>
+        <p>Flutter, React Native, Android, iOS</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdooM0HQWLGfNiRwhNKoPJMpi8DNR3xJP-K48Mtr_Z1ZboNCQ/viewform" class="cta-button">Apply Now</a>
+      </div>
+      <div class="card">
+        <h3>Full Stack Web Development</h3>
+        <p>MERN Stack, APIs, Authentication, Deployment</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdooM0HQWLGfNiRwhNKoPJMpi8DNR3xJP-K48Mtr_Z1ZboNCQ/viewform" class="cta-button">Apply Now</a>
+      </div>
+      <div class="card">
+        <h3>Cyber Security</h3>
+        <p>Ethical Hacking, Network Security, Pen Testing</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdooM0HQWLGfNiRwhNKoPJMpi8DNR3xJP-K48Mtr_Z1ZboNCQ/viewform" class="cta-button">Apply Now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <h3 class="faq-question">Is this internship paid?</h3>
+    <p>This is a ₹99 paid internship, which helps cover certificate processing and support.</p>
+    <h3 class="faq-question">Do top performers receive any rewards?</h3>
+    <p>Yes! We offer a stipend of up to ₹5000 to top-performing students.</p>
+    <h3 class="faq-question">Is it remote?</h3>
+    <p>Yes, 100% online and flexible for all students.</p>
+    <h3 class="faq-question">Will I get a certificate?</h3>
+    <p>Yes. Every student receives a verifiable certificate after successful completion.</p>
+  </section>
+
+  <section id="certificate-section">
+    <h2>🎓 Certificate Download</h2>
+    <p>Enter your unique code to download your internship certificate.</p>
+    <input type="text" id="certCode" placeholder="Enter your unique code" />
+    <br>
+    <button class="cta-button" onclick="checkCertificate()">Download</button>
+    <p id="certStatus"></p>
+    <div id="certLink"></div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:info@launchroots.in">info@launchroots.in</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/company/launchroots" target="_blank" rel="noopener noreferrer">Launch Roots</a></p>
+    <p>WhatsApp: <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">+91 98765 43210</a></p>
+  </section>
+
+  <button class="scroll-top" onclick="scrollToTop()" aria-label="Scroll to top">
+    ↑
+  </button>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://www.instagram.com/launchroots" target="_blank" rel="noopener noreferrer">
+        <img src="https://img.icons8.com/fluency/48/000000/instagram-new.png" alt="Instagram">
+      </a>
+      <a href="https://www.facebook.com/launchroots" target="_blank" rel="noopener noreferrer">
+        <img src="https://img.icons8.com/fluency/48/000000/facebook.png" alt="Facebook">
+      </a>
+      <a href="https://www.linkedin.com/company/launchroots" target="_blank" rel="noopener noreferrer">
+        <img src="https://img.icons8.com/fluency/48/000000/linkedin.png" alt="LinkedIn">
+      </a>
+    </div>
+    <p>&copy; 2025 Launch Roots. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+
+    // Close mobile menu when a link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.remove('active');
+      });
+    });
+
+    const certificateDB = {
+      "LR2025001": "https://drive.google.com/file/d/1GcoZeUuMovWXFTynJWF1_Z6u77MHoys1/view?usp=drive_link",
+      "LR2025002": "https://drive.google.com/uc?export=download&id=YOUR_CERT_2",
+      "LR2025003": "https://drive.google.com/uc?export=download&id=YOUR_CERT_3"
+    };
+
+    function checkCertificate() {
+      const code = document.getElementById("certCode").value.trim();
+      const link = certificateDB[code];
+      const status = document.getElementById("certStatus");
+      const certLink = document.getElementById("certLink");
+      
+      if (link) {
+        status.innerText = "✅ Verified! Click below to download.";
+        status.style.color = "var(--success)";
+        certLink.innerHTML = `<a class="download-link" href="${link}" target="_blank" rel="noopener noreferrer">Download Certificate</a>`;
+        
+        // Add celebration effect
+        celebrate();
+      } else {
+        status.innerText = "❌ Invalid code. Please check your entry.";
+        status.style.color = "var(--error)";
+        certLink.innerHTML = "";
+        
+        // Shake animation for invalid input
+        document.getElementById("certCode").classList.add("shake");
+        setTimeout(() => {
+          document.getElementById("certCode").classList.remove("shake");
+        }, 500);
+      }
+    }
+
+    // FAQ toggle functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        question.classList.toggle('active');
+        const answer = question.nextElementSibling;
+        answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + 'px';
+      });
+    });
+
+    // Scroll to top button
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.querySelector('.scroll-top');
+      if (window.pageYOffset > 300) {
+        scrollTop.classList.add('active');
+      } else {
+        scrollTop.classList.remove('active');
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Celebration effect for certificate download
+    function celebrate() {
+      const colors = ['#1a73e8', '#34a853', '#fbbc05', '#ea4335'];
+      const container = document.getElementById('certificate-section');
+      
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'absolute';
+        confetti.style.width = '8px';
+        confetti.style.height = '8px';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.borderRadius = '50%';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = '70%';
+        confetti.style.opacity = '0';
+        confetti.style.transform = 'translateY(0) rotate(0)';
+        confetti.style.zIndex = '10';
+        
+        container.appendChild(confetti);
+        
+        const animationDuration = Math.random() * 3 + 2;
+        
+        confetti.animate([
+          { opacity: 0, transform: 'translateY(0) rotate(0)' },
+          { opacity: 1, transform: 'translateY(-100px) rotate(180deg)' },
+          { opacity: 0, transform: 'translateY(-200px) rotate(360deg)' }
+        ], {
+          duration: animationDuration * 1000,
+          easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)'
+        });
+        
+        setTimeout(() => {
+          confetti.remove();
+        }, animationDuration * 1000);
+      }
+    }
+
+    // Animate elements on scroll
+    const observerOptions = {
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.card, .trust-item, section').forEach(element => {
+      observer.observe(element);
+    });
+
+    // Preload images for better performance
+    function preloadImages() {
+      const images = [
+        'https://img.icons8.com/color/48/verified-badge.png',
+        'https://img.icons8.com/color/48/conference-call.png',
+        'https://img.icons8.com/color/48/calendar.png',
+        'https://img.icons8.com/fluency/48/000000/instagram-new.png',
+        'https://img.icons8.com/fluency/48/000000/facebook.png',
+        'https://img.icons8.com/fluency/48/000000/linkedin.png'
+      ];
+      
+      images.forEach(img => {
+        const image = new Image();
+        image.src = img;
+      });
+    }
+
+    // Run preload on DOM content loaded
+    document.addEventListener('DOMContentLoaded', preloadImages);
+  </script>
+</body>
+</html>
